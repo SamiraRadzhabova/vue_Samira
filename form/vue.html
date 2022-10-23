@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vue.js | Form</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+  </head>
+  <body>
+  <div class="example"> 
+    <div v-if="formShow">
+<img src="img1.jpg" alt="Picrure" id="img">
+<form id="form">
+  <h1>Fill out the form</h1>
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input type="text" class="form-control" v-model="form.email">
+  </div>
+  <div class="form-group">
+    <label for="tel">Phone</label>
+    <input type="text" class="form-control" v-model="form.phone">
+  </div>
+  <div class="form-group">
+    <label for="fname">First Name</label>
+    <input type="text" class="form-control" v-model="form.firstname">
+  </div>
+  <div class="form-group">
+    <label for="lname">Last Name</label>
+    <input type="text" class="form-control" v-model="form.lastname">
+  </div>
+  <div class="form-group">
+    <h3>Guests 
+      <button type="button" class="btn_guests" @click="AddGuest">+</button> 
+    </h3>
+  </div>
+  <div class="form-group" v-for="element,index in guest" >
+    <label for="guest" @dblclick="DeleteGuest(index)" :key="index">Guests {{index+1}}</label>
+    <input type="text" class="form-control" v-model="guest[index]">
+  </div>
+  <button class="btn btn-outline-primary" id="btn" :disabled="!TestPole" @click.prevent="sendForm">Send Data</button>
+  </form>
+</div>
+<div v-else>
+    <h2 class="h2">All done!</h2>
+    <table class="table table-bordered" id="table">
+      <tr>
+        <td>Email</td>
+        <td>{{form.email}}</td>
+      </tr>
+      <tr>
+        <td>Phone</td>
+        <td>{{form.phone}}</td>
+      </tr>
+      <tr>
+        <td>Fullname</td>
+        <td>{{fullName}}</td>
+      </tr>
+      <tr>
+        <td>Guests</td>
+        <td>
+          <ul class="list-group">
+            <li class="list-group-item" v-for="element in guest">{{element}}</li>
+          </ul>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>  
+
+    <script src="vue.js"></script>
+    <script>
+      Vue.createApp({
+       data(){
+        return{
+          form:{
+          firstname:'',
+          lastname:'',
+          email: '',
+          phone:''
+        },
+          guest: [],
+          formShow:true,
+        }
+       },
+       computed:{
+        fullName(){
+          return `${this.form.firstname} ${this.form.lastname}`;
+        },
+        TestPole(){
+          return Object.values(this.form).every(item =>{
+            return item
+          })
+        }
+       },
+       methods:{
+        AddGuest(){
+          this.guest.push('');
+        },
+        DeleteGuest(index){
+          this.guest.splice(index, 1);
+        },
+        sendForm(){
+          this.formShow=!this.formShow;
+          this.guest=this.guest.filter(item=>{
+            return item.length>0;
+          })
+        }
+       }
+       }).mount(".example");
+    </script>
+  </body>
+</html>
