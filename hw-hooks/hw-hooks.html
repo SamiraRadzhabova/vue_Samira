@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>1</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous" />
+    <link href="style.css" rel="stylesheet" />
+    <script src="vue.js"></script>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="example">
+        <button class="btn btn-primary" id="element">Click me</button>
+        <hr>
+        <label for="">Field</label>
+          <input type="text" class="form-group" ref="inp" v-model="field" />
+        <hr>
+        <span>{{field}}</span>
+      </div>
+    </div>
+    <script>
+      /*
+		Ниже представлен список действий. Нужно описать, на каких этапах жизненного цикла (хуках) экземляра Vue вы будете 
+выполнять каждое из действий:
+Доступ к элементу (или переменной) после изменения и перерисовки DOM.
+				Список действий:
+				1) Получить элемент кнопки и записать его в переменную +
+				2) Навесить обработчик события на кнопку +
+				3) Удалить обработчик события с кнопки
+				4) Сфокусироваться на input (при загрузке страницы, то есть открыли файл, а у нас курсор уже в input) +
+				5) Запрос на сервер +
+				Example:           
+				fetch("https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents/Tiger_King/daily/20210901/20210930", {
+						method: 'GET',
+          })
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+            });
+				6) Изменять переменную counter поосле изменения и перерисовки DOM +
+		*/
+      Vue.createApp({
+        data: () => ({
+          counter: 0,
+          field: "",
+          elem:'',
+        }),
+        beforeCreate() { 
+        },
+        created() {
+          //5
+         fetch("https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article/en.wikipedia/all-access/all-agents/Tiger_King/daily/20210901/20210930", {
+            method: 'GET',
+          })  
+            .then((response) => {
+              return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+            });
+        },
+        beforeMount() { 
+        },
+        mounted() {
+          //1
+          elem = document.getElementById('element'); 
+          console.log('Element:', elem); 
+          //4
+          this.$refs.inp.focus(); 
+          //2
+          function fun(){
+            console.log('Hello World');
+            this.removeEventListener("click", fun);
+          }
+          elem.addEventListener("click", fun);
+        },
+        beforeUpdate() {},
+        updated() {
+        //6
+        this.counter++;
+        console.log('Updated:',this.counter); 
+        },
+        beforeUnmount() {
+        },
+        unmounted() {},
+      }).mount(".example");
+    </script>
+  </body>
+</html>
