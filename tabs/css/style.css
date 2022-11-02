@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+.main {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.filter{
+    margin-left: 50px;
+}
+
+.but {
+    display: inline-flex;
+    margin-top: 40px;
+    margin-left: 20px;
+    text-decoration: none;
+    position: relative;
+    font-size: 15px;
+    line-height: 20px;
+    padding: 12px 26px;
+    color: #FFF;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Roboto Condensed', Тahoma, sans-serif;
+    background: #5b2a55;
+    cursor: pointer;
+    border: 2px solid #fbbfff;
+    outline: 1px solid;
+    outline-color: #b70083;
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.but:hover,
+.but:active,
+.but:focus {
+    box-shadow: inset 0 0 20px #fbbfff;
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 10px;
+    color: #FFF;
+}
+
+.cards {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    padding-top: 30px;
+    margin-left: 50px;
+}
+
+.cards_item {
+    display: flex;
+    padding: 1rem;
+    opacity: 1;
+}
+
+.cards_item:hover {
+    opacity: 0.7;
+}
+img {
+    height: 170px;
+    max-width: 100%;
+    vertical-align: middle;
+    border-radius: 50%;
+}
+
+@media (min-width: 40rem) {
+    .cards_item {
+        width: 50%;
+    }
+}
+
+@media (min-width: 56rem) {
+    .cards_item {
+        width: 33.3333%;
+    }
+}
+
+.card {
+    background-color: white;
+    border-radius: 0.25rem;
+    box-shadow: 0 20px 40px -14px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    width: 300px;
+    height: 400px;
+    padding-top: 30px;
+}
+
+.card_content {
+    padding: 1rem;
+    
+}
+
+.card_category{
+        color: rgb(255, 255, 255);
+        font-size: 13px;
+        line-height: 1.8;
+        text-align: center;
+        margin-bottom: 1.25rem;
+        width: 90px;
+        background-color: #5b2a55;
+        border-radius: 5px;
+        display: inline-block;
+            margin-right: 20px;
+            margin-bottom: 25px;
+}
+
+.card_title {
+    color: #000;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+    margin: 0px;
+    text-align: center;
+    padding-top: 20px;
+}
+
+.card_text {
+    color: #000;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 1.25rem;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 20px;
+}
