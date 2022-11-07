@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ru">
+<head>
+	 <meta charset="UTF-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	 <title>1</title>
+	 <link rel="stylesheet" href="css/bootstrap.min.css">
+	 <link rel="stylesheet" href="css/font-awesome.min.css">
+	 <link href="css/styles.css" rel="stylesheet">
+	 <script src="js/vue.js"></script>
+</head>
+<body>
+	 <div class="wrapper">
+		  <div class="sample">
+				<form>
+				<div class="progress">
+					<div class="progress-bar" role="progressbar" :style="alertStyles"></div>
+				</div>
+				
+				<div v-for="infos, index in info">
+					<div class="form-group">
+						<label>{{infos.name}}</label>
+						<img src="yes.jpg" class="yesImg" v-if="info[index].textIsShow">
+						<img src="no.jpg" class="noImg" v-else-if="info[index].textIsShow1">
+						<input type="text" class="form-control" v-model="info[index].value" @input="PatternProverka(index)">
+					</div>
+		        
+				</div>
+				
+				<button class="btn btn-primary">
+					Send Data
+				</button>
+			</form>
+		</div>
+	 </div>
+	<script>
+		
+		Vue.createApp({
+			data: () => ({
+				info: [
+					{
+						name: 'Name',
+						value: '',
+						pattern: /^[a-zA-Z ]{2,30}$/,
+						textIsShow: false,
+						textIsShow1: false
+					},
+					{
+						name: 'Phone',
+						value: '',
+						pattern: /^[0-9]{7,14}$/,
+						textIsShow: false,
+						textIsShow1: false
+					},
+					{
+						name: 'Email',
+						value: '',
+						pattern: /.+/,
+						textIsShow: false,
+						textIsShow1: false
+					},
+					{
+						name: 'Some Field 1',
+						value: '',
+						pattern: /.+/,
+						textIsShow: false,
+						textIsShow1: false
+					},
+					{
+						name: 'Some Field 2',
+						value: '',
+						pattern: /.+/,
+						textIsShow: false,
+						textIsShow1: false
+					}
+				],
+				paternPr:null,
+				 widthPrBar: 0,
+				
+			}),
+			computed: {
+				alertStyles() {
+					return {
+						"width": this.widthPrBar + "%",
+					};
+				}
+			},
+			 methods: {
+				PatternProverka(index){
+					    this.paternPr= this.info[index].pattern.test(this.info[index].value);
+						console.log(this.paternPr);
+						if(this.paternPr === true){
+							if(this.info[index].textIsShow != true)
+							this.widthPrBar += 20;
+							 this.info[index].textIsShow=true;
+							 this.info[index].textIsShow1=false;
+						}
+						else if(this.paternPr===false){
+							if (this.info[index].textIsShow == true)
+								this.widthPrBar -= 20;
+							this.info[index].textIsShow1=true;
+							this.info[index].textIsShow=false;
+
+						}
+				},
+			},
+		}).mount('.sample');
+	</script>
+</body>
+</html>
