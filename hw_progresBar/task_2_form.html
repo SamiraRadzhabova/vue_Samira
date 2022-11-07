@@ -91,13 +91,13 @@
 						console.log(this.paternPr);
 						if(this.paternPr === true){
 							if(this.info[index].textIsShow != true)
-							this.widthPrBar += 20;
+							this.widthPrBar += 100/(this.info.length);
 							 this.info[index].textIsShow=true;
 							 this.info[index].textIsShow1=false;
 						}
 						else if(this.paternPr===false){
 							if (this.info[index].textIsShow == true)
-								this.widthPrBar -= 20;
+								this.widthPrBar -= 100 / (this.info.length);
 							this.info[index].textIsShow1=true;
 							this.info[index].textIsShow=false;
 
