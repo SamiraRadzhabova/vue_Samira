@@ -1,11 +1,12 @@
 <template>
-<div class="container">
-  <div class="model">
-    <div class="model-up">
-      <a class="but" @click="showMd">&#10006;</a>
+  <div class="container" ref="modalWrapper">
+    <div class="model">
+      <div class="model-up">
+        <a class="but" @click="showMd">&#10006;</a>
+      </div>
+      <slot></slot>
     </div>
-    <slot></slot>
-  </div></div>
+  </div>
 </template>
 
 <script>
@@ -14,27 +15,43 @@ export default {
   components: {
     name: "ModalApp",
   },
-    methods: {
-    showMd(){
-      this.$emit('close-window');
-    }
+  mounted() {
+    let refThis = this;
+    document.addEventListener("click", function (item) {
+      if (item.target === refThis.$refs.modalWrapper) {
+        refThis.showMd();
+      }
+    });
+  },
+  methods: {
+    showMd() {
+      this.$emit("close-window");
+    },
   },
 };
 </script>
 
 <style>
+.container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+}
 .model {
   width: 700px;
   height: 500px;
-  background-color: #ECEFF1;
+  background-color: #eceff1;
   box-shadow: 6px 6px 20px rgba(0, 0, 0, 0.3);
-  margin-top: 20px;
   margin-left: 350px;
+  margin-top: 110px;
 }
 .model-up {
   width: 700px;
   height: 60px;
-  background-color:  #546E7A;
+  background-color: #546e7a;
 }
 .but {
   padding-right: 25px;
@@ -44,5 +61,4 @@ export default {
   color: white;
   font-size: 18px;
 }
-
 </style>

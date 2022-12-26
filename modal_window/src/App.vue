@@ -1,22 +1,24 @@
 <template>
-  
-    <button class="btn" @click="showWindow">CLICK ME</button>
-   
-    <modal-app v-if="showModal" @close-window="showWindow"> <div class="modal-backdrop">
-      <div class="wrapper">
-        <img src="@/assets/black_pantera.jpg" alt="" class="img-film" />
-        <div>
-          <h1 class="info">Black Panther: Wakanda Forever</h1>
-          <p class="text">
-            Black Panther is a 2018 American superhero film based on the comic
-            book by Stan Lee and Jack Kirby about the character of the same name
-            published by Marvel Comics. Produced by Marvel Studios and
-            distributed by Walt Disney Studios Motion Pictures, the film is the
-            eighteenth film in the Marvel Cinematic Universe.
-          </p>
+  <button class="btn" @click="showWindow">CLICK ME</button>
+  <transition name="modalShow">
+    <modal-app v-if="showModal" @close-window="showWindow">
+      <div class="modal-backdrop">
+        <div class="wrapper">
+          <img src="@/assets/black_pantera.jpg" alt="" class="img-film" />
+          <div>
+            <h1 class="info">Black Panther: Wakanda Forever</h1>
+            <p class="text">
+              Black Panther is a 2018 American superhero film based on the comic
+              book by Stan Lee and Jack Kirby about the character of the same
+              name published by Marvel Comics. Produced by Marvel Studios and
+              distributed by Walt Disney Studios Motion Pictures, the film is
+              the eighteenth film in the Marvel Cinematic Universe.
+            </p>
+          </div>
         </div>
-      </div></div>
+      </div>
     </modal-app>
+  </transition>
 </template>
 
 <script>
@@ -47,8 +49,8 @@ export default {
 </script>
 
 <style>
-body{
-  background: linear-gradient(45deg,#B06AB3,#4568DC );
+body {
+  background: linear-gradient(85deg, #b06ab3, #4568dc);
 }
 .btn {
   display: block;
@@ -60,23 +62,12 @@ body{
   padding-bottom: 10px;
   text-align: center;
   color: #fff;
-   background: transparent;
+  background: transparent;
   border-radius: 45px;
   cursor: pointer;
-  margin-left: 630px;
-  margin-top: 30px;
+  margin-left: 650px;
+  margin-top: 300px;
 }
-/* .modal-backdrop {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.3);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
 .wrapper {
   display: flex;
 }
@@ -91,12 +82,20 @@ body{
   text-align: center;
   width: 300px;
 }
-.text{
+.text {
   margin-left: 30px;
   font-size: 15px;
   width: 300px;
   text-align: justify;
   margin-top: 30px;
 }
+.modalShow-enter,
+.modalShow-leave-active {
+  opacity: 0;
+}
 
+.modalShow-enter-active,
+.modalShow-leave-active {
+  transition: opacity 0.5s ease;
+}
 </style>
